@@ -1,3 +1,25 @@
-from django.shortcuts import render
+from rest_framework import generics
 
-# Create your views here.
+from models import Player, Tournament
+from serializers import PlayerSerializer, TournamentSerializer
+
+
+class PlayerList(generics.ListCreateAPIView):
+    queryset = Player.objects.all()
+    serializer_class = PlayerSerializer
+
+
+class PlayerDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Player.objects.all()
+    serializer_class = PlayerSerializer
+
+
+class TournamentList(generics.ListCreateAPIView):
+    queryset = Tournament.objects.all()
+    serializer_class = TournamentSerializer
+
+
+class TournamentDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Tournament.objects.all()
+    serializer_class = TournamentSerializer
+
