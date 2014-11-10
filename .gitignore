@@ -1,5 +1,6 @@
 .idea
 titlematch_api.iml
+db.sqlite3
 
 # Created by .gitignore support plugin (hsz.mobi)
 ### Python template
