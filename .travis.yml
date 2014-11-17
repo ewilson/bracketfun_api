@@ -1,6 +1,10 @@
 language: python
 python: "2.7"
 
+# Django SECRET_KEY
+env:
+- secure: "uqDB5TmNUJwpcsrn9/LZfg2CioBDppt4ic7Z4w7434/xRJpAS4Hu6MnDjLW5lvoMtDCTuu0dvcenKvDRLBXhIWqX8ZRL+3PbzWH5yydbGAITrstD8SNbT68dpKIKiIegTHnGW/3Dm/+cHoo622J/iYue6HssObpWKm1iWedNQ0k="
+
 install: "pip install -r requirements.txt"
 
 script: "./manage.py test"
