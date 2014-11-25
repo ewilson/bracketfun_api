@@ -6,3 +6,4 @@ cat ~/.ssh/config
 git remote add prod production:/home/ubuntu/titlematch_api.git
 git push prod master
 exit
+
