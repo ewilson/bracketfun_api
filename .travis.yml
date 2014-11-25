@@ -1,10 +1,16 @@
 language: python
-python: "2.7"
-
-# Django SECRET_KEY
+python: '2.7'
 env:
-- secure: "uqDB5TmNUJwpcsrn9/LZfg2CioBDppt4ic7Z4w7434/xRJpAS4Hu6MnDjLW5lvoMtDCTuu0dvcenKvDRLBXhIWqX8ZRL+3PbzWH5yydbGAITrstD8SNbT68dpKIKiIegTHnGW/3Dm/+cHoo622J/iYue6HssObpWKm1iWedNQ0k="
+- secure: uqDB5TmNUJwpcsrn9/LZfg2CioBDppt4ic7Z4w7434/xRJpAS4Hu6MnDjLW5lvoMtDCTuu0dvcenKvDRLBXhIWqX8ZRL+3PbzWH5yydbGAITrstD8SNbT68dpKIKiIegTHnGW/3Dm/+cHoo622J/iYue6HssObpWKm1iWedNQ0k=
 
-install: "pip install -r requirements.txt"
+install: pip install -r requirements.txt
 
-script: "./manage.py test"
+script: ./manage.py test
+
+before_install:
+- openssl aes-256-cbc -K $encrypted_17bd042b2b1a_key -iv $encrypted_17bd042b2b1a_iv
+  -in prod.pem.enc -out .travis/prod.pem -d
+
+after_success:
+  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && .travis/after_success.sh
+
