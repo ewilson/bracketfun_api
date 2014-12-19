@@ -13,7 +13,7 @@ class PlayerTestCase(TestCase):
         self.c = Client()
 
     def test_can_list_player(self):
-        Player.objects.create(name='Abe');
+        Player.objects.create(name='Abe')
         Player.objects.create(name='Ben')
 
         response = self.c.get('/players/')
