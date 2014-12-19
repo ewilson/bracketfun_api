@@ -10,7 +10,10 @@ class PlayerSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class TournamentSerializer(serializers.ModelSerializer):
-    players = serializers.PrimaryKeyRelatedField(many=True)
+    players = serializers.PrimaryKeyRelatedField(
+        many=True,
+        queryset=Player.objects.all()
+    )
 
     class Meta:
         model = Tournament
