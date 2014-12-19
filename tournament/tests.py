@@ -1,9 +1,10 @@
 import json
-from urllib import urlencode
+import codecs
+from urllib.parse import urlencode
 
 from django.test import TestCase, Client
 
-from models import Player, Tournament
+from tournament.models import Player, Tournament
 
 
 class PlayerTestCase(TestCase):
@@ -17,7 +18,7 @@ class PlayerTestCase(TestCase):
         Player.objects.create(name='Ben')
 
         response = self.c.get('/players/')
-        player_dict = json.loads(response.content)
+        player_dict = json.loads(response.content.decode('utf-8'))
 
         self.assertEquals(2, len(player_dict))
         self.assertEquals(['Abe','Ben'], [p['name'] for p in player_dict])
@@ -46,7 +47,7 @@ class PlayerTestCase(TestCase):
         pid = ezekiel.id
 
         response = self.c.get('/players/%d/' % pid)
-        ezekiel_dict = json.loads(response.content)
+        ezekiel_dict = json.loads(response.content.decode('utf-8'))
 
         self.assertEquals(pid, ezekiel_dict['id'])
         self.assertEquals('Ezekiel', ezekiel_dict['name'])
@@ -81,7 +82,7 @@ class TournamentTestCase(TestCase):
         t2.players.add(self.charles.id,self.brad.id,self.darcy.id)
 
         response = self.c.get('/tournaments/')
-        tournament_dict = json.loads(response.content)
+        tournament_dict = json.loads(response.content.decode('utf-8'))
 
         self.assertEquals(2, len(tournament_dict))
         self.assertEquals(['Knockout','World Cup'], [t['name'] for t in tournament_dict])
@@ -114,12 +115,11 @@ class TournamentTestCase(TestCase):
         t.players.add(self.charles.id,self.brad.id,self.darcy.id)
 
         response = self.c.get('/tournaments/%s/' % t.id)
-        tournament_dict = json.loads(response.content)
+        tournament_dict = json.loads(response.content.decode('utf-8'))
         self.assertEquals('Bracket Challenge', tournament_dict['name'])
         self.assertEquals({self.charles.id,self.brad.id,self.darcy.id},
                           set(tournament_dict['players']))
 
-    # This test could be better, but the client is wonky.
     def test_can_update_tournament(self):
         t = Tournament.objects.create(name='Elimimation')
         t.players.add(self.charles.id,self.brad.id)
@@ -128,9 +128,8 @@ class TournamentTestCase(TestCase):
         response = self.c.put('/tournaments/%s/' % t.id,
                               urlencode(body),
                               content_type='application/x-www-form-urlencoded')
-        print response.status_code
-        print response.content
 
+        self.assertEquals(200, response.status_code)
         retrieved_t = Tournament.objects.get(id=t.id)
         self.assertEquals('Eliminator', retrieved_t.name)
 
