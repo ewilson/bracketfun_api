@@ -1,7 +1,7 @@
 from rest_framework import generics
 
-from models import Player, Tournament
-from serializers import PlayerSerializer, TournamentSerializer
+from tournament.models import Player, Tournament
+from tournament.serializers import PlayerSerializer, TournamentSerializer
 
 
 class PlayerList(generics.ListCreateAPIView):

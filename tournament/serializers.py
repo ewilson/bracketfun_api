@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from models import Player, Tournament
+from tournament.models import Player, Tournament
 
 
 class PlayerSerializer(serializers.HyperlinkedModelSerializer):

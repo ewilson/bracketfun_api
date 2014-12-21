@@ -6,7 +6,7 @@ from django.db import models
 class Player(models.Model):
     name = models.CharField(max_length=20)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -16,7 +16,7 @@ class Tournament(models.Model):
     state = models.SmallIntegerField(default=0)
     players = models.ManyToManyField(Player)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -24,7 +24,7 @@ class Match(models.Model):
     tournament = models.ForeignKey(Tournament, related_name='matches')
     completed = models.BooleanField(default=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return "Match: %d, Tournament: %s" % (self.id, self.tournament.name)
 
     class Meta:
@@ -38,5 +38,5 @@ class Attempt(models.Model):
     score = models.SmallIntegerField(null=True, blank=True)
     opponent_score = models.SmallIntegerField(null=True, blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s in Match: %s" % (self.player, str(self.match))
