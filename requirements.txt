@@ -1,4 +1,4 @@
 Django==1.7.1
 Markdown==2.5.1
+django-cors-headers==1.0.0
 djangorestframework==3.0.2
-

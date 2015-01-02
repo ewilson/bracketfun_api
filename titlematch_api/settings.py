@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'tournament',
     'rest_framework',
+    'corsheaders',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -51,6 +52,28 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+)
+
+CORS_ORIGIN_ALLOW_ALL = False
+
+CORS_ORIGIN_WHITELIST = (
+    'localhost:4200',
+    'titlematch.s3-website-us-east-1.amazonaws.com'
+)
+
+CORS_ALLOW_HEADERS = (
+    'x-requested-with',
+    'content-type',
+    'accept',
+    'accept-encoding',
+    'origin',
+    'authorization',
+    'x-csrftoken'
+)
+CORS_EXPOSE_HEADERS = (
+    'Access-Control-Allow-Origin: *',
 )
 
 ROOT_URLCONF = 'titlematch_api.urls'
