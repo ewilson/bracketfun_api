@@ -11,13 +11,13 @@ class Player(models.Model):
 
 
 class Tournament(models.Model):
-    name = models.CharField(max_length=30)
+    title = models.CharField(max_length=30)
     event_date = models.DateField(default=date.today)
     state = models.SmallIntegerField(default=0)
     players = models.ManyToManyField(Player)
 
     def __str__(self):
-        return self.name
+        return self.title
 
 
 class Match(models.Model):

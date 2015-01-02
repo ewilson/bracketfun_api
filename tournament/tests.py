@@ -76,8 +76,8 @@ class TournamentTestCase(TestCase):
         self.c = Client()
 
     def test_can_list_tournament(self):
-        t1 = Tournament.objects.create(name='Knockout')
-        t2 = Tournament.objects.create(name='World Cup')
+        t1 = Tournament.objects.create(title='Knockout')
+        t2 = Tournament.objects.create(title='World Cup')
         t1.players.add(self.alfred.id,self.brad.id,self.darcy.id)
         t2.players.add(self.charles.id,self.brad.id,self.darcy.id)
 
@@ -85,22 +85,22 @@ class TournamentTestCase(TestCase):
         tournament_dict = json.loads(response.content.decode('utf-8'))
 
         self.assertEquals(2, len(tournament_dict))
-        self.assertEquals(['Knockout','World Cup'], [t['name'] for t in tournament_dict])
+        self.assertEquals(['Knockout','World Cup'], [t['title'] for t in tournament_dict])
         self.assertEquals([{self.alfred.id,self.brad.id,self.darcy.id},{self.brad.id,self.darcy.id,self.charles.id}],
                           [set(t['players']) for t in tournament_dict])
 
     def test_can_create_tournament(self):
-        response = self.c.post('/tournaments/', {'name': 'Smack-Down',
+        response = self.c.post('/tournaments/', {'title': 'Smack-Down',
                                                  'players': [self.alfred.id,self.charles.id]})
 
         self.assertEquals(201, response.status_code)
 
-        sd = Tournament.objects.get(name='Smack-Down')
-        self.assertEquals('Smack-Down',sd.name)
+        sd = Tournament.objects.get(title='Smack-Down')
+        self.assertEquals('Smack-Down',sd.title)
         self.assertEquals({self.alfred,self.charles}, set(sd.players.all()))
 
     def test_can_delete_tournament(self):
-        t1 = Tournament.objects.create(name='Shoot-out')
+        t1 = Tournament.objects.create(title='Shoot-out')
         t1.players.add(self.alfred.id,self.brad.id,self.darcy.id)
 
         response = self.c.delete('/tournaments/%s/' % t1.id)
@@ -108,28 +108,28 @@ class TournamentTestCase(TestCase):
 
         all_tournaments = Tournament.objects.all()
         for tournament in all_tournaments:
-            self.assertNotEqual('Shoot-out',tournament.name)
+            self.assertNotEqual('Shoot-out',tournament.title)
 
     def test_can_retrieve_tournament(self):
-        t = Tournament.objects.create(name='Bracket Challenge')
+        t = Tournament.objects.create(title='Bracket Challenge')
         t.players.add(self.charles.id,self.brad.id,self.darcy.id)
 
         response = self.c.get('/tournaments/%s/' % t.id)
         tournament_dict = json.loads(response.content.decode('utf-8'))
-        self.assertEquals('Bracket Challenge', tournament_dict['name'])
+        self.assertEquals('Bracket Challenge', tournament_dict['title'])
         self.assertEquals({self.charles.id,self.brad.id,self.darcy.id},
                           set(tournament_dict['players']))
 
     def test_can_update_tournament(self):
-        t = Tournament.objects.create(name='Elimimation')
+        t = Tournament.objects.create(title='Elimimation')
         t.players.add(self.charles.id,self.brad.id)
 
-        body = {'name': 'Eliminator'}
+        body = {'title': 'Eliminator'}
         response = self.c.put('/tournaments/%s/' % t.id,
                               urlencode(body),
                               content_type='application/x-www-form-urlencoded')
 
         self.assertEquals(200, response.status_code)
         retrieved_t = Tournament.objects.get(id=t.id)
-        self.assertEquals('Eliminator', retrieved_t.name)
+        self.assertEquals('Eliminator', retrieved_t.title)
 
