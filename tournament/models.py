@@ -13,8 +13,15 @@ class Player(models.Model):
 class Tournament(models.Model):
     title = models.CharField(max_length=30)
     event_date = models.DateField(default=date.today)
-    state = models.SmallIntegerField(default=0)
     players = models.ManyToManyField(Player)
+    SETUP = 0
+    PLAY = 1
+    COMPLETE = 2
+    STATE_CHOICES = (
+        (SETUP, 'Setup'), (PLAY, 'Play'), (COMPLETE, 'Complete')
+    )
+    state = models.SmallIntegerField(default=SETUP,
+                                     choices=STATE_CHOICES)
 
     def __str__(self):
         return self.title
@@ -23,8 +30,10 @@ class Tournament(models.Model):
 class Match(models.Model):
     tournament = models.ForeignKey(Tournament, related_name='matches')
     completed = models.BooleanField(default=False)
-    home_player = models.ForeignKey(Player, related_name='home_matches')
-    away_player = models.ForeignKey(Player, related_name='away_matches')
+    home_player = models.ForeignKey(Player, related_name='home_matches',
+                                    on_delete=models.PROTECT)
+    away_player = models.ForeignKey(Player, related_name='away_matches',
+                                    on_delete=models.PROTECT)
     home_score = models.SmallIntegerField(default=0)
     away_score = models.SmallIntegerField(default=0)
 
