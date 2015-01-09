@@ -23,20 +23,16 @@ class Tournament(models.Model):
 class Match(models.Model):
     tournament = models.ForeignKey(Tournament, related_name='matches')
     completed = models.BooleanField(default=False)
+    home_player = models.ForeignKey(Player, related_name='home_matches')
+    away_player = models.ForeignKey(Player, related_name='away_matches')
+    home_score = models.SmallIntegerField(default=0)
+    away_score = models.SmallIntegerField(default=0)
 
     def __str__(self):
-        return "Match: %d, Tournament: %s" % (self.id, self.tournament.name)
+        return "Match: %d, Tournament: %s -- %s vs %s" % (self.id, self.tournament.title,
+                                                          self.home_player.name, self.away_player.name)
 
     class Meta:
         verbose_name_plural = "matches"
 
 
-# Join table between Player and Match, stores both scores for convenience.
-class Attempt(models.Model):
-    player = models.ForeignKey(Player)
-    match = models.ForeignKey(Match)
-    score = models.SmallIntegerField(null=True, blank=True)
-    opponent_score = models.SmallIntegerField(null=True, blank=True)
-
-    def __str__(self):
-        return "%s in Match: %s" % (self.player, str(self.match))
