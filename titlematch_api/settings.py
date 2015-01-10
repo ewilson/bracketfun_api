@@ -60,7 +60,8 @@ CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ORIGIN_WHITELIST = (
     'localhost:4200',
-    'titlematch.s3-website-us-east-1.amazonaws.com'
+    'titlematch.s3-website-us-east-1.amazonaws.com',
+    'd1dnnxl6a5vp2b.cloudfront.net'
 )
 
 CORS_ALLOW_HEADERS = (
