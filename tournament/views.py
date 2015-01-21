@@ -15,8 +15,15 @@ class PlayerDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class TournamentList(generics.ListCreateAPIView):
-    queryset = Tournament.objects.all()
     serializer_class = TournamentSerializer
+
+    def get_queryset(self):
+        queryset = Tournament.objects.all()
+        state = self.request.QUERY_PARAMS.get('state', None)
+        if state is not None:
+            print('State',state)
+            queryset = queryset.filter(state=state)
+        return queryset
 
 
 class TournamentDetail(generics.RetrieveUpdateDestroyAPIView):
