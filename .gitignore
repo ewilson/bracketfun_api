@@ -2,6 +2,7 @@
 titlematch_api.iml
 db.sqlite3
 static/
+*~
 
 # Created by .gitignore support plugin (hsz.mobi)
 ### Python template
