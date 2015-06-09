@@ -3,11 +3,11 @@
 TitleMatch API
 ==============
 
-Python/Django API for TitleMatch applications. This will serve the [TitleMatch web](https://github.com/ewilson/titlematch_web) client.
+Python/Django API for TitleMatch applications. This will serve the [TitleMatch web](https://github.com/ewilson/titlematch_web) client. A more detailed README is maintained at that repo.
 
 ### Local development setup
 
-TitleMatch uses Python 2.7
+TitleMatch uses Python 3.4
 
 To install dependencies:
 
