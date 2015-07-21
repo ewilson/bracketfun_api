@@ -17,6 +17,10 @@ To run locally:
 
     $ ./manage.py runserver
 
+or better, install Postgres and Heroku, and use:
+
+    $ foreman start
+
 To run tests:
 
     $ ./manage.py test
