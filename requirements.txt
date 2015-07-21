@@ -2,3 +2,7 @@ Django==1.8.1
 Markdown==2.5.1
 django-cors-headers==1.0.0
 djangorestframework==3.1
+psycopg2==2.6.1
+dj-database-url==0.3.0
+gunicorn==19.3.0
+whitenoise==1.0.6
