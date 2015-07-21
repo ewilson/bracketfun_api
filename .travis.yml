@@ -13,4 +13,3 @@ deploy:
   on:
     repo: ewilson/titlematch_api
   run: ./manage.py migrate
-  run: ./manage.py collectstatic --noinput
