@@ -19,7 +19,7 @@ class TournamentList(generics.ListCreateAPIView):
 
     def get_queryset(self):
         queryset = Tournament.objects.all()
-        state = self.request.QUERY_PARAMS.get('state', None)
+        state = self.request.query_params.get('state', None)
         if state is not None:
             queryset = queryset.filter(state=state)
         return queryset
