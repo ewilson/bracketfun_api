@@ -13,13 +13,12 @@ To install dependencies:
 
     $ pip install -r requirements.txt
 
-To run locally:
-
-    $ ./manage.py runserver
-
-or better, install Postgres and Heroku, and use:
+To run locally, install Postgres and Heroku, and use:
 
     $ foreman start
+
+using foreman instead of `runserver` will allow the application to use the same environment variables as in production
+with Heroku
 
 To run tests:
 
