@@ -3,23 +3,33 @@
 TitleMatch API
 ==============
 
-Python/Django API for TitleMatch applications. This will serve the [TitleMatch web](https://github.com/ewilson/titlematch_web) client. 
-A more detailed README is maintained at that repo.
+Python/Django API for the TitleMatch web application.
+This will serve the [TitleMatch web](https://github.com/ewilson/titlematch_web) client. 
+The README.md in that that repo is more interesting.
 
 ### Local development setup
 
-TitleMatch uses Python 3.5
+TitleMatch uses Python 3.4
 
 To install dependencies:
 
     $ pip install -r requirements.txt
 
-To run locally, install Postgres and Heroku, and use:
+#### Postgres setup
 
-    $ foreman start
+1. Install Postgres
+1. Create user `tma` with password `tma_pass`
+1. Create database `titlematch`
+1. Grant privileges to `tma` for `titlematch`
+1. Use `./manage migrate` to create DB tables
 
-using foreman instead of `runserver` will allow the application to use the same environment variables as in production
-with Heroku
+#### Heroku setup
+
+This application is setup for use with Heroku, so `./manage.py runserver` will not detect the DB engine.
+
+To run locally, install Heroku toolbelt, and use:
+
+    $ heroku local
 
 To run tests:
 
