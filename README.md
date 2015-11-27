@@ -20,12 +20,13 @@ To install dependencies:
 1. Install Postgres
 1. Create user `tma` with password `tma_pass`
 1. Create database `titlematch`
-1. Grant privileges to `tma` for `titlematch`
+1. `export DATABASE_URL='postgres://tma:tma_pass@localhost:5432/titlematch'`
 1. Use `./manage migrate` to create DB tables
 
 #### Heroku setup
 
-This application is setup for use with Heroku, so `./manage.py runserver` will not detect the DB engine.
+You should be able to run with `./manage.py runserver`, but it is better to use Heroku locally, to 
+minimize differences between dev and production.
 
 To run locally, install Heroku toolbelt, and use:
 
