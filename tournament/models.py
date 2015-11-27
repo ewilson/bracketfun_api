@@ -40,7 +40,7 @@ class Match(models.Model):
                                     on_delete=models.PROTECT)
     home_score = models.SmallIntegerField(default=0)
     away_score = models.SmallIntegerField(default=0)
-    pool = models.CharField(max_length=1)
+    pool = models.CharField(max_length=1, blank=True, null=True)
 
     def __str__(self):
         return "Match: %d, Tournament: %s, Pool: %s -- %s vs %s" % \
