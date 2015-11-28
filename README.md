@@ -23,6 +23,14 @@ To install dependencies:
 1. `export DATABASE_URL='postgres://tma:tma_pass@localhost:5432/titlematch'`
 1. Use `./manage migrate` to create DB tables
 
+To reset DB on Heroku:
+
+    $ heroku pg:reset --app secure-badlands-8145 DATABASE
+
+To reset DB locally:
+
+    $ ./manaage.py flush
+    
 #### Heroku setup
 
 You should be able to run with `./manage.py runserver`, but it is better to use Heroku locally, to 

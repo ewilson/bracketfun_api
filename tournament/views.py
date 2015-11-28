@@ -1,7 +1,9 @@
 from rest_framework import generics
+from rest_framework.response import Response
+from django.db.models.deletion import ProtectedError
 
-from tournament.models import Player, Tournament, Match
-from tournament.serializers import PlayerSerializer, TournamentSerializer, MatchSerializer
+from tournament.models import Player, Tournament, Match, Entry
+from tournament.serializers import PlayerSerializer, TournamentSerializer, MatchSerializer, EntrySerializer
 
 
 class PlayerList(generics.ListCreateAPIView):
@@ -12,6 +14,23 @@ class PlayerList(generics.ListCreateAPIView):
 class PlayerDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer
+
+    def delete(self, request, *args, **kwargs):
+        try:
+            response = super(PlayerDetail, self).delete(self, request, *args, **kwargs)
+        except ProtectedError as e:
+            response = Response(status=409, data=str(e))
+        return response
+
+
+class EntryList(generics.ListCreateAPIView):
+    queryset = Entry.objects.all()
+    serializer_class = EntrySerializer
+
+
+class EntryDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Entry.objects.all()
+    serializer_class = EntrySerializer
 
 
 class TournamentList(generics.ListCreateAPIView):
