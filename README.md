@@ -23,7 +23,7 @@ To install dependencies:
 1. `export DATABASE_URL='postgres://tma:tma_pass@localhost:5432/titlematch'`
 1. Use `./manage migrate` to create DB tables
 
-To reset DB on Heroku:
+To reset DB on Heroku (drops tables):
 
     $ heroku pg:reset --app secure-badlands-8145 DATABASE
 
