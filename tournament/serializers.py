@@ -1,18 +1,32 @@
 from rest_framework import serializers
 
-from tournament.models import Player, Tournament, Match
+from tournament.models import Player, Tournament, Match, Entry
 
 
 class PlayerSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Player
-        fields = ('id', 'name',)
+        fields = ('id', 'name')
+
+
+class EntrySerializer(serializers.HyperlinkedModelSerializer):
+    player = serializers.PrimaryKeyRelatedField(
+        queryset=Player.objects.all()
+    )
+    tournament = serializers.PrimaryKeyRelatedField(
+        queryset=Tournament.objects.all()
+    )
+
+    class Meta:
+        model = Entry
+        fields = ('id', 'player', 'tournament', 'pool')
 
 
 class TournamentSerializer(serializers.ModelSerializer):
-    players = serializers.PrimaryKeyRelatedField(
+    entries = serializers.PrimaryKeyRelatedField(
         many=True,
-        queryset=Player.objects.all()
+        queryset=Entry.objects.all(),
+        required=False
     )
     matches = serializers.PrimaryKeyRelatedField(
         many=True,
@@ -22,15 +36,15 @@ class TournamentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tournament
-        fields = ('id', 'title', 'event_date', 'state', 'players', 'matches', 'type')
+        fields = ('id', 'title', 'event_date', 'state', 'entries', 'matches', 'type')
 
 
 class MatchSerializer(serializers.ModelSerializer):
     home_player = serializers.PrimaryKeyRelatedField(
-        queryset=Player.objects.all()
+        queryset=Entry.objects.all()
     )
     away_player = serializers.PrimaryKeyRelatedField(
-        queryset=Player.objects.all()
+        queryset=Entry.objects.all()
     )
     tournament = serializers.PrimaryKeyRelatedField(
         queryset=Tournament.objects.all()
@@ -39,4 +53,4 @@ class MatchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Match
         fields = ('id', 'tournament', 'completed',
-                  'home_player', 'away_player', 'home_score', 'away_score', 'pool')
+                  'home_player', 'away_player', 'home_score', 'away_score')
