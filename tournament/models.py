@@ -45,12 +45,12 @@ class Entry(models.Model):
 
 class Match(models.Model):
     managed = True
-    tournament = models.ForeignKey(Tournament, related_name='matches')
+    tournament = models.ForeignKey(Tournament, related_name='matches', on_delete=models.CASCADE)
     completed = models.BooleanField(default=False)
     home_player = models.ForeignKey(Entry, related_name='home_matches',
-                                    on_delete=models.PROTECT)
+                                    on_delete=models.CASCADE)
     away_player = models.ForeignKey(Entry, related_name='away_matches',
-                                    on_delete=models.PROTECT)
+                                    on_delete=models.CASCADE)
     home_score = models.SmallIntegerField(default=0)
     away_score = models.SmallIntegerField(default=0)
 

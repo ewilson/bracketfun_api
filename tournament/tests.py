@@ -121,7 +121,8 @@ class TournamentTestCase(TestCase):
         t1.entries.add(e1, e2, e3)
         t1.save()
 
-        response = self.c.delete('/tournaments/%s/' % t1.id)
+        response = self.c.delete('/tournaments/%s/' % t1.id,
+                                 content_type='application/x-www-form-urlencoded')
         self.assertEquals(204, response.status_code)
 
         all_tournaments = Tournament.objects.all()
