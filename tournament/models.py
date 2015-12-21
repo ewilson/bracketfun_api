@@ -13,7 +13,7 @@ class Player(models.Model):
 
 class Tournament(models.Model):
     managed = True
-    title = models.CharField(max_length=30, unique=True)
+    title = models.CharField(max_length=30)
     event_date = models.DateField(default=date.today)
     SETUP = 0
     PLAY = 1
@@ -27,6 +27,9 @@ class Tournament(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        unique_together = ('title', 'event_date')
 
 
 class Entry(models.Model):
