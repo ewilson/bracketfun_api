@@ -61,7 +61,7 @@ CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
     'localhost:4200',
     'bracketfun.com',
-    'titlematch-staging.s3-website-us-east-1.amazonaws.com',
+    'staging.bracketfun.com.s3-website-us-east-1.amazonaws.com',
 )
 
 CORS_ALLOW_HEADERS = (
