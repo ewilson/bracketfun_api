@@ -3,14 +3,26 @@ language: python
 python: '3.4'
 env:
 - secure: uqDB5TmNUJwpcsrn9/LZfg2CioBDppt4ic7Z4w7434/xRJpAS4Hu6MnDjLW5lvoMtDCTuu0dvcenKvDRLBXhIWqX8ZRL+3PbzWH5yydbGAITrstD8SNbT68dpKIKiIegTHnGW/3Dm/+cHoo622J/iYue6HssObpWKm1iWedNQ0k=
+env:
+- DJANGO_DEBUG=True CORS_ORIGIN=bracketfun.com SECRET_KEY=traviskey
+
 install: pip install -r requirements.txt
 script: ./manage.py test
 
 deploy:
-  provider: heroku
+- provider: heroku
   api_key:
     secure: KJl9DlM5rwZSWepNS+RZOAmwy3VIgA0jK67DLqarRa4mIdOLabBPrXVHaR9Qhqn7g0x5FogEN0DpWuTU3er9kfqdg3Is7EdrHzk421s63wFn99TIQvG/SjYOvcsx2HZVdFdoRoEhkoONkWIQKQU1+BEfe2A65DCP+X6Wwl+xnV8=
-  app: secure-badlands-8145
+  app: bracketfun-api
   on:
     repo: ewilson/titlematch_api
+    branch: master
+  run: ./manage.py migrate
+- provider: heroku
+  api_key:
+    secure: KJl9DlM5rwZSWepNS+RZOAmwy3VIgA0jK67DLqarRa4mIdOLabBPrXVHaR9Qhqn7g0x5FogEN0DpWuTU3er9kfqdg3Is7EdrHzk421s63wFn99TIQvG/SjYOvcsx2HZVdFdoRoEhkoONkWIQKQU1+BEfe2A65DCP+X6Wwl+xnV8=
+  app: staging.bracketfun-api
+  on:
+    repo: ewilson/titlematch_api
+    branch: staging
   run: ./manage.py migrate

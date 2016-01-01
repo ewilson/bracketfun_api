@@ -1,15 +1,15 @@
 [![Build Status](https://travis-ci.org/ewilson/titlematch_api.svg?branch=serialization)](https://travis-ci.org/ewilson/titlematch_api)
 
-TitleMatch API
+BracketFun API
 ==============
 
-Python/Django API for the TitleMatch web application.
-This will serve the [TitleMatch web](https://github.com/ewilson/titlematch_web) client. 
+Python/Django API for the BracketFun web application.
+This will serve the [BracketFun web](https://github.com/ewilson/titlematch_web) client. 
 The README.md in that that repo is more interesting.
 
 ### Local development setup
 
-TitleMatch uses Python 3.4
+BracketFun-API uses Python 3.4
 
 To install dependencies:
 
@@ -18,10 +18,10 @@ To install dependencies:
 #### Postgres setup
 
 1. Install Postgres
-1. Create user `tma` with password `tma_pass`
-1. Create database `titlematch`
-1. `export DATABASE_URL='postgres://tma:tma_pass@localhost:5432/titlematch'`
-1. Use `./manage migrate` to create DB tables
+1. Create user `bracket_app` with password `bracket_pass`
+1. Create database `bracketfun`
+1. `DATABASE_URL=postgres://bracket_app:bracket_pass@localhost:5432/bracketfun`
+1. Use `./manage makemigrations tournament` and `./manage migrate` to create DB tables
 
 To reset DB on Heroku (drops tables):
 
