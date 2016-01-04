@@ -25,7 +25,7 @@ To install dependencies:
 
 To reset DB on Heroku (drops tables):
 
-    $ heroku pg:reset --app secure-badlands-8145 DATABASE
+    $ heroku pg:reset --app bracketfun-api DATABASE
 
 To reset DB locally:
 
