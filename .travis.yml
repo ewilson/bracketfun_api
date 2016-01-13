@@ -15,7 +15,7 @@ deploy:
     secure: KJl9DlM5rwZSWepNS+RZOAmwy3VIgA0jK67DLqarRa4mIdOLabBPrXVHaR9Qhqn7g0x5FogEN0DpWuTU3er9kfqdg3Is7EdrHzk421s63wFn99TIQvG/SjYOvcsx2HZVdFdoRoEhkoONkWIQKQU1+BEfe2A65DCP+X6Wwl+xnV8=
   app: bracketfun-api
   on:
-    repo: ewilson/titlematch_api
+    repo: ewilson/bracketfun_api
     branch: master
   run: ./manage.py migrate
 - provider: heroku
@@ -23,6 +23,6 @@ deploy:
     secure: KJl9DlM5rwZSWepNS+RZOAmwy3VIgA0jK67DLqarRa4mIdOLabBPrXVHaR9Qhqn7g0x5FogEN0DpWuTU3er9kfqdg3Is7EdrHzk421s63wFn99TIQvG/SjYOvcsx2HZVdFdoRoEhkoONkWIQKQU1+BEfe2A65DCP+X6Wwl+xnV8=
   app: staging-bracketfun-api
   on:
-    repo: ewilson/titlematch_api
+    repo: ewilson/bracketfun_api
     branch: staging
   run: ./manage.py migrate
