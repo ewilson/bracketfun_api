@@ -23,7 +23,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = os.environ['DJANGO_DEBUG'] == 'True'
 
 ALLOWED_HOSTS = [
-    '.compute-1.amazonaws.com',
+    'bracketfun-api.herokuapp.com',
     'localhost',
 ]
 
